@@ -28,9 +28,9 @@ Source: "DeltarunePatcherCLI.7z"; DestDir: "{tmp}"; Flags: deleteafterinstall
 [Code]
 const
   LangURL = 'https://github.com/Lazy-Desman/DeltaruneRus/releases/download/latest/lang.7z';
-  LangURLMirror = 'https://filldor.ru/deltaRU/lang.7z';
-  ScriptsURL = 'https://github.com/Lazy-Desman/DeltaruneRus/releases/download/latest/scripts.7z';
-  ScriptsURLMirror = 'https://filldor.ru/deltaRU/scripts.7z';
+  LangURLMirror = 'https://github.com/Lazy-Desman/DeltaruneRus/releases/download/latest/lang.7z';
+  ScriptsURL = 'https://github.com/Lazy-Desman/DeltranslatePatch/releases/download/latest/scripts.7z';
+  ScriptsURLMirror = 'https://github.com/Lazy-Desman/DeltranslatePatch/releases/download/latest/scripts.7z';
   
   DeltaruneExe = 'DELTARUNE.exe';
 var
@@ -130,7 +130,8 @@ begin
     ' - Установка DelTranslate' + #13#10 +
     ' - Полный перевод Главы 1' + #13#10 +
     ' - Полный перевод Главы 2' + #13#10 +
-    ' - Полный перевод Главы 3' + #13#10#13#10 +
+    ' - Полный перевод Главы 3' + #13#10 +
+    ' - Полный перевод Главы 4' + #13#10#13#10 +
     'Перевод будет применён поверх вашей текущей установки игры.' + #13#10 +
     'Все оригинальные файлы игры останутся нетронутыми.'
   );
