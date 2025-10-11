@@ -4,7 +4,7 @@
 
 # Как это собрать?
 
-- Для начала вам нужно установить [Inno Setup](https://jrsoftware.org/isinfo.php)
+- Для начала вам нужно установить [Inno Setup](https://jrsoftware.org/isinfo.php) (а также плагины к нему, вы их можете посмотерть в коде)
 
 - Потом вам нужно скомпилировать (опубликовать - `dotnet publish`) DeltaPatcherCLI (он находится в соответствующей папке)
 
