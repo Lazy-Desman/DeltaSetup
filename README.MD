@@ -1,23 +1,23 @@
-# Что это?
+# What is this?
 
-Это исходники установщика русификатора DELTARUNE от LazyDesman
+This is the source code for the DELTARUNE Russifier installer by LazyDesman.
 
-# Как это собрать?
+# How to build it?
 
-- Для начала вам нужно установить [Inno Setup](https://jrsoftware.org/isinfo.php) (а также плагины к нему, вы их можете посмотерть в коде)
+- First, you need to install [Inno Setup](https://jrsoftware.org/isinfo.php) (as well as its plugins, you can see them in the code)
 
-- Потом вам нужно скомпилировать (опубликовать - `dotnet publish`) DeltaPatcherCLI (он находится в соответствующей папке)
+- Then you need to compile (publish - `dotnet publish`) DeltaPatcherCLI (it's in the appropriate folder)
 
-- Дальше вам нужно поместить DeltaPatcherCLI в 7zip архив и назвать его "DeltarunePatcherCLI.7z", достаточно "быстрого" сжатия
+- Next, you need to put DeltaPatcherCLI in a 7zip archive and name it "DeltarunePatcherCLI.7z"; "fast" compression is sufficient.
 
-ВАЖНО! ИСПОЛНЯЕМЫЙ ФАЙЛ В АРХИВЕ НЕ ДОЛЖЕН ЛЕЖАТЬ ВО ВЛОЖЕННОЙ ПАПКЕ
+IMPORTANT! THE EXECUTIVE FILE IN THE ARCHIVE MUST NOT BE IN A SUBFOLDER
 
-- После этого вы кладёте архив рядом с файлом "setup.iss"
+- After that, place the archive next to the "setup.iss" file.
 
-- И, наконец, компилируете установщик в Inno Setup
+- And finally, compile the installer in Inno Setup.
 
-- Готово, вы собрали свой установщик перевода DELTARUNE!
+- Done, you've built your DELTARUNE translation installer!
 
 -----
 
-Этот репозиторий был перенесён из оригинального, дабы показать, что это установщик Выхухолей. 
+Этот репозиторий был перенесён из оригинального, дабы показать, что это установщик Выхухолей.
