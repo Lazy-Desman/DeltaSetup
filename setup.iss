@@ -1,5 +1,5 @@
 [Setup]
-AppName=Русификатор DELTARUNE
+AppName=Russifier DELTARUNE
 AppVersion=1.4.1
 AppPublisher=LazyDesman
 DefaultDirName={autopf}\DELTARUNE Russian Patch
@@ -17,10 +17,22 @@ WizardImageFile=banner.bmp
 // SetupLogging=True
 
 [Languages]
-Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "en"; MessagesFile: "compiler:Default.isl"
+Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Messages]
-ExitSetupMessage=Установка не завершена. Если вы выйдете, русификатор не будет установлен.%n%nВы сможете завершить установку, запустив программу установки позже.%n%nВыйти из программы установки?
+en.ExitSetupMessage=The installation is not complete. If you exit, the Russifier will not be installed.%n%nYou can complete the installation by running the setup program later.%n%nDo you want to exit the setup program?
+ru.ExitSetupMessage=Установка не завершена. Если вы выйдете, русификатор не будет установлен.%n%nВы сможете завершить установку, запустив программу установки позже.%n%nВыйти из программы установки?
+
+[CustomMessages]
+en.WelcomeLabel1=Welcome to the DELTARUNE Russifier installation wizard
+ru.WelcomeLabel1=Добро пожаловать в мастер установки русификатора DELTARUNE
+en.WelcomeLabel2=This wizard will install the Translation patch for the game DELTARUNE, prepared by the LazyDesman team.
+ru.WelcomeLabel2=Этот мастер установит русификатор для игры DELTARUNE, подготовленный командой LazyDesman.
+en.wpWelcome1=Installation Description
+ru.wpWelcome1=Описание установки
+en.wpWelcome2=What will be installed?
+ru.wpWelcome2=Что будет установлено?
 
 [Files]
 Source: "DeltaPatcherCLI.7z"; DestDir: "{tmp}"; Flags: deleteafterinstall
@@ -59,7 +71,7 @@ begin
   end;
 end;
 
-// Находится ли в папке полная версия DELTARUNE
+// Is the full version of DELTARUNE in this folder?
 function CheckDeltaruneLoc(DirPath: String): Boolean;
 begin
   Result := FileExists(DirPath + DeltaruneExe);
@@ -67,7 +79,7 @@ begin
     Result := FileExists(AddBackslash(DirPath) + 'chapter4_windows\data.win');
 end;
 
-// Поиск папки DELTARUNE
+// Search for the DELTARUNE folder
 function FindGameLocation(): String;
 var
   GameLocations: array[0..3] of String;
@@ -100,7 +112,7 @@ begin
   
   Result := '';
   
-  // Windows ПК
+  // Windows PC
   for i := 0 to High(ExistingDrives) do
   begin
     DrivePrefix := ExistingDrives[i];
@@ -119,13 +131,13 @@ end;
 
 procedure InitializeWizard;
 begin
-  WizardForm.WelcomeLabel1.Caption := 'Добро пожаловать в мастер установки русификатора DELTARUNE';
-  WizardForm.WelcomeLabel2.Caption := 'Этот мастер установит русификатор для игры DELTARUNE, подготовленный командой LazyDesman.';
+  WizardForm.WelcomeLabel1.Caption := CustomMessage('WelcomeLabel1');
+  WizardForm.WelcomeLabel2.Caption := CustomMessage('WelcomeLabel2');
 
   InfoPage := CreateOutputMsgPage(
     wpWelcome,
-    'Описание установки',
-    'Что будет установлено?',
+    CustomMessage('wpWelcome1'),
+    CustomMessage('wpWelcome2'),
     'Установка русификатора включает в себя:' + #13#10 +
     ' - Установка DelTranslate' + #13#10 +
     ' - Полный перевод Главы 1' + #13#10 +
