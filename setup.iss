@@ -89,10 +89,10 @@ en.ExceptionMsg2b=If the game folder has the "Read-only" attribute, then remove 
 tr.ExceptionMsg2b=Если у папки с игрой стоит атрибут "Только для чтения", тогда уберите его (не забудьте "Применить") и попробуйте снова.
 en.RaiseException1=Archive file not found, path - 
 tr.RaiseException1=Файл архива не найден, путь - 
-en.DownloadToTempWithMirror1=Loading language files...
-tr.DownloadToTempWithMirror1=Загрузка языковых файлов...
-en.DownloadToTempWithMirror2=Loading scripts...
-tr.DownloadToTempWithMirror2=Загрузка скриптов...
+en.DownloadToTempWithMirror1a=Loading language files...
+tr.DownloadToTempWithMirror1a=Загрузка языковых файлов...
+en.DownloadToTempWithMirror2a=Loading scripts...
+tr.DownloadToTempWithMirror2a=Загрузка скриптов...
 en.DownloadToTempWithMirror3=An error occurred while downloading files: 
 tr.DownloadToTempWithMirror3=В процессе скачивания файлов произошла ошибка: 
 en.ProgressPage3a=Unpacking the patcher...
@@ -115,6 +115,8 @@ en.FinishedText3b=Click Finish to exit the setup program.
 tr.FinishedText3b=Нажмите «Завершить», чтобы выйти из программы установки
 en.FinishedHeadingLabel1=Completing the installation of the DELTARUNE Translation
 tr.FinishedHeadingLabel1=Завершение установки русификатора DELTARUNE
+en.DownloadToTempWithMirror1b=lang.7z
+tr.DownloadToTempWithMirror1b=lang.7z
 
 [Files]
 Source: "DeltaPatcherCLI.7z"; DestDir: "{tmp}"; Flags: deleteafterinstall
@@ -422,15 +424,15 @@ var
   LangZipPath, ScriptsZipPath, PatcherZipPath, GamePath, PatcherPath, ExceptionMsg: String;
   ResultCode: Integer;
 begin
-  LangZipPath := ExpandConstant('{tmp}\lang.7z');
+  LangZipPath := ExpandConstant('{tmp}' + CustomMessage('DownloadToTempWithMirror1b'));
   ScriptsZipPath := ExpandConstant('{tmp}\scripts.7z');
   PatcherZipPath := ExpandConstant('{tmp}\DeltaPatcherCLI.7z');
   GamePath := GamePathPage.Values[0];
 
   ProgressPage.Show;
   try
-    DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror1'), LangURL, LangURLMirror, 'lang.7z');
-    DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror2'), ScriptsURL, ScriptsURLMirror, 'scripts.7z');
+    DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror1a'), LangURL, LangURLMirror, CustomMessage('DownloadToTempWithMirror1b'));
+    DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror2a'), ScriptsURL, ScriptsURLMirror, 'scripts.7z');
   except
     MsgBox(CustomMessage('DownloadToTempWithMirror3') + GetExceptionMessage(), mbError, MB_OK);
     Result := False;

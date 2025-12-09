@@ -26,7 +26,7 @@ IMPORTANT! THE EXECUTABLE FILE IN THE ARCHIVE MUST NOT BE IN A SUBFOLDER
 
 - In the beginning of the \[Code\] section change `LangURL` and `LangURLMirror` to download links to your translation in an archived folder (in the archive the top folder should be the `lang` folder)
 
-- At the end of \[CustomMessages\] change these two line to the name of your file in the previous step:
+- At the end of \[CustomMessages\] change these two lines to the name of your file in the previous step:
 
 `en.DownloadToTempWithMirror1b=lang.7z`,
 `tr.DownloadToTempWithMirror1b=lang.7z`
