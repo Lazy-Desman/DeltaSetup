@@ -6,7 +6,7 @@ This is the source code for the DELTARUNE Translation installer by LazyDesman.
 
 - First, download this repo and open `DeltaPatcherCLI` in Visual Studio
 
-- Then you need to compile it (publish - `dotnet publish -F net8.0` in terminal) (it will be in `DeltaPatcherCLI/DeltaPatcher/bin/Release/net8.0/win-x64/publish/`)
+- Then you need to compile it (publish - `dotnet publish -f net8.0` in terminal) (it will be in `DeltaPatcherCLI/DeltaPatcher/bin/Release/net8.0/win-x64/publish/`)
 
 - Next, you need to put DeltaPatcherCLI in a 7zip archive and name it `DeltaPatcherCLI.7z`, then put it next to the `setup.iss` file.
 
@@ -25,11 +25,6 @@ IMPORTANT! THE EXECUTABLE FILE IN THE ARCHIVE MUST NOT BE IN A SUBFOLDER
 - In the \[Messages\] and \[CustomMessages\] sections translate all the English lines to your language and replace the Russian lines with them
 
 - In the beginning of the \[Code\] section change `LangURL` and `LangURLMirror` to download links to your translation in an archived folder (in the archive the top folder should be the `lang` folder)
-
-- At the end of \[CustomMessages\] change these two lines to the name of your file in the previous step:
-
-`en.DownloadToTempWithMirror1b=lang.7z`,
-`tr.DownloadToTempWithMirror1b=lang.7z`
 
 - And finally, compile the installer in Inno Setup.
 
