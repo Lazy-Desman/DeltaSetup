@@ -18,21 +18,53 @@ WizardImageFile=banner.bmp
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"
-Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "tr"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Messages]
 en.ExitSetupMessage=The installation is not complete. If you exit, the Russifier will not be installed.%n%nYou can complete the installation by running the setup program later.%n%nDo you want to exit the setup program?
-ru.ExitSetupMessage=Установка не завершена. Если вы выйдете, русификатор не будет установлен.%n%nВы сможете завершить установку, запустив программу установки позже.%n%nВыйти из программы установки?
+tr.ExitSetupMessage=Установка не завершена. Если вы выйдете, русификатор не будет установлен.%n%nВы сможете завершить установку, запустив программу установки позже.%n%nВыйти из программы установки?
 
 [CustomMessages]
 en.WelcomeLabel1=Welcome to the DELTARUNE Russifier installation wizard
-ru.WelcomeLabel1=Добро пожаловать в мастер установки русификатора DELTARUNE
+tr.WelcomeLabel1=Добро пожаловать в мастер установки русификатора DELTARUNE
 en.WelcomeLabel2=This wizard will install the Translation patch for the game DELTARUNE, prepared by the LazyDesman team.
-ru.WelcomeLabel2=Этот мастер установит русификатор для игры DELTARUNE, подготовленный командой LazyDesman.
+tr.WelcomeLabel2=Этот мастер установит русификатор для игры DELTARUNE, подготовленный командой LazyDesman.
 en.wpWelcome1=Installation Description
-ru.wpWelcome1=Описание установки
+tr.wpWelcome1=Описание установки
 en.wpWelcome2=What will be installed?
-ru.wpWelcome2=Что будет установлено?
+tr.wpWelcome2=Что будет установлено?
+en.wpWelcome3=Installation of the Russifier includes:
+tr.wpWelcome3=Установка русификатора включает в себя:
+en.wpWelcome4= - Installing DelTranslate
+tr.wpWelcome4= - Установка DelTranslate
+en.wpWelcome5= - Full translation of Chapter 1
+tr.wpWelcome5= - Полный перевод Главы 1
+en.wpWelcome6= - Full translation of Chapter 2
+tr.wpWelcome6= - Полный перевод Главы 2
+en.wpWelcome7= - Full translation of Chapter 3
+tr.wpWelcome7= - Полный перевод Главы 3
+en.wpWelcome8= - Full translation of Chapter 4
+tr.wpWelcome8= - Полный перевод Главы 4
+en.wpWelcome9=The translation will be applied over your current game installation.
+tr.wpWelcome9=Перевод будет применён поверх вашей текущей установки игры.
+en.wpWelcome10=All original game files will remain intact.
+tr.wpWelcome10=Все оригинальные файлы игры останутся нетронутыми.
+en.CreateInputDirPage1=Select the DELTARUNE folder
+tr.CreateInputDirPage1=Выберите папку DELTARUNE
+en.CreateInputDirPage2=Where is the game installed?
+tr.CreateInputDirPage2=Где установлена игра?
+en.CreateInputDirPage3=Select the folder containing "DELTARUNE.exe" and the "chapter1_windows" ... "chapter4_windows" folders.
+tr.CreateInputDirPage3=Выберите папку, содержащую "DELTARUNE.exe" и папки "chapter1_windows" ... "chapter4_windows".
+en.CreateInputDirPage4=Typically it looks like this:
+tr.CreateInputDirPage4=Обычно это выглядит так:
+en.FinishedText1=The DELTARUNE Russifier has been successfully installed on your computer.
+tr.FinishedText1=Русификатор DELTARUNE успешно установлен на ваш компьютер.
+en.FinishedText2=Click «Finish» to exit the setup program.
+tr.FinishedText2=Нажмите «Завершить», чтобы выйти из программы установки.
+en.ProgressPage1a=Performing the installation
+tr.ProgressPage1a=Выполнение установки
+en.ProgressPage1b=Please wait...
+tr.ProgressPage1b=Пожалуйста, подождите...
 
 [Files]
 Source: "DeltaPatcherCLI.7z"; DestDir: "{tmp}"; Flags: deleteafterinstall
@@ -138,32 +170,32 @@ begin
     wpWelcome,
     CustomMessage('wpWelcome1'),
     CustomMessage('wpWelcome2'),
-    'Установка русификатора включает в себя:' + #13#10 +
-    ' - Установка DelTranslate' + #13#10 +
-    ' - Полный перевод Главы 1' + #13#10 +
-    ' - Полный перевод Главы 2' + #13#10 +
-    ' - Полный перевод Главы 3' + #13#10 +
-    ' - Полный перевод Главы 4' + #13#10#13#10 +
-    'Перевод будет применён поверх вашей текущей установки игры.' + #13#10 +
-    'Все оригинальные файлы игры останутся нетронутыми.'
+    CustomMessage('wpWelcome3') + #13#10 +
+    CustomMessage('wpWelcome4') + #13#10 +
+    CustomMessage('wpWelcome5') + #13#10 +
+    CustomMessage('wpWelcome6') + #13#10 +
+    CustomMessage('wpWelcome7') + #13#10 +
+    CustomMessage('wpWelcome8') + #13#10#13#10 +
+    CustomMessage('wpWelcome9') + #13#10 +
+    CustomMessage('wpWelcome10')
   );
 
   GamePathPage := CreateInputDirPage(
     InfoPage.ID,
-    'Выберите папку DELTARUNE',
-    'Где установлена игра?',
-    'Выберите папку, содержащую "DELTARUNE.exe" и папки "chapter1_windows" ... "chapter4_windows".'#13#10 +
-    'Обычно это выглядит так: "C:\Program Files (x86)\Steam\steamapps\common\DELTARUNE"',
+    CustomMessage('CreateInputDirPage1'),
+    CustomMessage('CreateInputDirPage2'),
+    CustomMessage('CreateInputDirPage3')#13#10 +
+    CustomMessage('CreateInputDirPage4') + '"C:\Program Files (x86)\Steam\steamapps\common\DELTARUNE"',
     False, ''
   );
   GamePathPage.Add('');
   GamePathPage.Values[0] := ExpandConstant('{sd}\Program Files (x86)\Steam\steamapps\common\DELTARUNE');
   
-  FinishedText := 'Русификатор DELTARUNE успешно установлен на ваш компьютер.' + #13#10 +
+  FinishedText := CustomMessage('FinishedText1') + #13#10 +
                   + #13#10 +
-                  'Нажмите «Завершить», чтобы выйти из программы установки.';
+                  CustomMessage('FinishedText2');
 
-  ProgressPage := CreateOutputProgressPage('Выполнение установки', 'Пожалуйста, подождите...');
+  ProgressPage := CreateOutputProgressPage(CustomMessage('ProgressPage1a'), CustomMessage('ProgressPage1b'));
   
   InitExistingDrives;
 end;
