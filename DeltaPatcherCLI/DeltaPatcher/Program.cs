@@ -225,7 +225,7 @@ class Program
             string scriptPath = Path.Combine(scriptsPath, chapter, "Fix.csx");
 
             WriteLine();
-            WriteLine($"===== CHAPTER PATCHING: {chapter.ToUpper()} =====");    //"===== ПАТЧИНГ ГЛАВЫ: {chapter.ToUpper()} ====="
+            WriteLine($"===== PATCHING: {chapter.ToUpper()} =====");    //"===== ПАТЧИНГ ГЛАВЫ: {chapter.ToUpper()} ====="
             WriteLine($"- Game file: {dataWinPath}");                           //"- Файл игры: {dataWinPath}"
             WriteLine($"- Patch script: {scriptPath}");                         //"- Скрипт патча: {scriptPath}"
 
@@ -291,11 +291,11 @@ class Program
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            WriteLine($"\"- Chapter {chapter} successfully passed!\"");    //"- Глава {chapter} успешно пропатчена!"
+            WriteLine($"\"- {chapter} successfully passed!\"");    //"- Глава {chapter} успешно пропатчена!"
         }
         catch (Exception ex)
         {
-            WriteLine($"!!! ERROR WHILE PATCHING CHAPTER {chapter}:");      //"!!! ОШИБКА ПРИ ПАТЧИНГЕ ГЛАВЫ {chapter}:"
+            WriteLine($"!!! ERROR WHILE PATCHING {chapter}:");      //"!!! ОШИБКА ПРИ ПАТЧИНГЕ ГЛАВЫ {chapter}:"
             WriteLine(ex.Message);
 
             if (ex.InnerException != null)
