@@ -298,14 +298,12 @@ begin
   end;
 end;
 
-procedure DownloadToTempWithMirror(const TextHeader, MainURL, MirrorURL: String);
+procedure DownloadToTempWithMirror(const TextHeader, MainURL, MirrorURL, FileName: String);
 var
   FileSizeBytes: Integer;
   FileSizeStr: String;
   DownloadCallback: TOnDownloadProgress;
-  FileName: String;
 begin
-  FileName := GetLastSegment(MainURL);
   ProgressPage.SetText(TextHeader, '');
   
   try
@@ -441,15 +439,48 @@ var
   LangZipPath, ScriptsZipPath, PatcherZipPath, GamePath, PatcherPath, ExceptionMsg: String;
   ResultCode: Integer;
 begin
-  LangZipPath := ExpandConstant('{tmp}\' + GetLastSegment(LangURL));
-  ScriptsZipPath := ExpandConstant('{tmp}\' + GetLastSegment(ScriptsURL));
   PatcherZipPath := ExpandConstant('{tmp}\DeltaPatcherCLI.7z');
   GamePath := GamePathPage.Values[0];
 
   ProgressPage.Show;
   try
-    DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror1'), LangURL, LangURLMirror);
-    DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror2'), ScriptsURL, ScriptsURLMirror);
+    if FileExists(ExpandConstant('{src}\lang.7z')) then
+    begin
+      if MsgBox('Offline lang archive found. Use it instad of downloading?', mbConfirmation, MB_YESNO) = IDYES then
+      begin
+        LangZipPath := ExpandConstant('{tmp}\lang.7z');
+        CopyFile(ExpandConstant('{src}\lang.7z'), LangZipPath, False)
+        
+      end
+      else
+      begin
+        LangZipPath := ExpandConstant('{tmp}\' + GetLastSegment(LangURL));
+        DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror1'), LangURL, LangURLMirror, GetLastSegment(LangURL));
+      end;
+    end
+    else
+    begin
+      LangZipPath := ExpandConstant('{tmp}\' + GetLastSegment(LangURL));
+      DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror1'), LangURL, LangURLMirror, GetLastSegment(LangURL));
+    end;
+    if FileExists(ExpandConstant('{src}\scripts.7z')) then
+    begin
+     if MsgBox('Offline scripts archive found. Use it instad of downloading?', mbConfirmation, MB_YESNO) = IDYES then
+      begin
+        ScriptsZipPath := ExpandConstant('{tmp}\scripts.7z');
+        CopyFile(ExpandConstant('{src}\scripts.7z'), ScriptsZipPath, False);
+      end
+      else
+      begin
+        ScriptsZipPath := ExpandConstant('{tmp}\' + GetLastSegment(ScriptsURL));
+        DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror2'), ScriptsURL, ScriptsURLMirror, GetLastSegment(ScriptsURL));
+      end;
+    end
+    else
+    begin
+      ScriptsZipPath := ExpandConstant('{tmp}\' + GetLastSegment(ScriptsURL));
+      DownloadToTempWithMirror(CustomMessage('DownloadToTempWithMirror2'), ScriptsURL, ScriptsURLMirror, GetLastSegment(ScriptsURL));
+    end;
   except
     MsgBox(CustomMessage('DownloadToTempWithMirror3') + GetExceptionMessage(), mbError, MB_OK);
     Result := False;
