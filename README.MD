@@ -26,7 +26,7 @@ IMPORTANT! THE EXECUTABLE FILE IN THE ARCHIVE MUST NOT BE IN A SUBFOLDER
 
 - In the \[Messages\] and \[CustomMessages\] sections translate all the English lines to your language and replace the Russian lines with them
 
-- In the beginning of the \[Code\] section change `LangURL` and `LangURLMirror` to download links to your translation in a `.7z` archive (in the archive the top folder should be the `lang` folder)
+- In the beginning of the \[Code\] section change `LangURL` and `LangURLMirror` to download links to your translation in a `.7z` archive (in the archive the top folder should be the `lang` folder) (if the download link is long, then it's advised to use an URL shortener)
 
 - And finally, compile the installer in Inno Setup.
 
