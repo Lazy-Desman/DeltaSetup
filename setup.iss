@@ -1,6 +1,6 @@
 [Setup]
-AppName=DELTARUNE Translator
-AppVersion=1.4.1
+AppName=DELTARUNE (your lang) Translation Installer
+AppVersion=1.5.0
 AppPublisher=LazyDesman
 DefaultDirName={autopf}\DELTARUNE Translation Patch
 OutputBaseFilename=DeltaruneTranslationInstaller
@@ -19,118 +19,70 @@ ShowLanguageDialog=yes
 UsePreviousLanguage=no
 
 [Languages]
-Name: "en"; MessagesFile: "compiler:Default.isl"
-Name: "tr"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "tr"; MessagesFile: "compiler:Default.isl"
+// Should be "compiler:Languages\YourLang.isl" if exists
 
 [Messages]
-en.ExitSetupMessage=The installation is not complete. If you exit, the Translation will not be installed.%n%nYou can complete the installation by running the setup program later.%n%nDo you want to exit the setup program?
-tr.ExitSetupMessage=Установка не завершена. Если вы выйдете, русификатор не будет установлен.%n%nВы сможете завершить установку, запустив программу установки позже.%n%nВыйти из программы установки?
+tr.ExitSetupMessage=The installation is not complete. If you exit, the translation will not be installed.%n%nYou can complete the installation by running the setup program later.%n%nDo you want to exit the setup program?
 
 [CustomMessages]
-en.WelcomeLabel1=Welcome to the DELTARUNE Translation installation wizard
-tr.WelcomeLabel1=Добро пожаловать в мастер установки русификатора DELTARUNE
-en.WelcomeLabel2=This wizard will install the Translation patch for the game DELTARUNE, prepared by the LazyDesman team.
-tr.WelcomeLabel2=Этот мастер установит русификатор для игры DELTARUNE, подготовленный командой LazyDesman.
-en.wpWelcome1=Installation Description
-tr.wpWelcome1=Описание установки
-en.wpWelcome2=What will be installed?
-tr.wpWelcome2=Что будет установлено?
-en.wpWelcome3=Installation of the Translation includes:
-tr.wpWelcome3=Установка русификатора включает в себя:
-en.wpWelcome4= - Installing DelTranslate
-tr.wpWelcome4= - Установка DelTranslate
-en.wpWelcome5= - Full translation of Chapter 1
-tr.wpWelcome5= - Полный перевод Главы 1
-en.wpWelcome6= - Full translation of Chapter 2
-tr.wpWelcome6= - Полный перевод Главы 2
-en.wpWelcome7= - Full translation of Chapter 3
-tr.wpWelcome7= - Полный перевод Главы 3
-en.wpWelcome8= - Full translation of Chapter 4
-tr.wpWelcome8= - Полный перевод Главы 4
-en.wpWelcome9=The translation will be applied over your current game installation.
-tr.wpWelcome9=Перевод будет применён поверх вашей текущей установки игры.
-en.wpWelcome10=All original game files will remain intact.
-tr.wpWelcome10=Все оригинальные файлы игры останутся нетронутыми.
-en.CreateInputDirPage1=Select the DELTARUNE folder
-tr.CreateInputDirPage1=Выберите папку DELTARUNE
-en.CreateInputDirPage2=Where is the game installed?
-tr.CreateInputDirPage2=Где установлена игра?
-en.CreateInputDirPage3=Select the folder containing "DELTARUNE.exe" and the "chapter1_windows" ... "chapter4_windows" folders.
-tr.CreateInputDirPage3=Выберите папку, содержащую "DELTARUNE.exe" и папки "chapter1_windows" ... "chapter4_windows".
-en.CreateInputDirPage4=Typically it looks like this: 
-tr.CreateInputDirPage4=Обычно это выглядит так: 
-en.FinishedText1=The DELTARUNE Translation has been successfully installed on your computer.
-tr.FinishedText1=Русификатор DELTARUNE успешно установлен на ваш компьютер.
-en.FinishedText2=Click «Finish» to exit the setup program.
-tr.FinishedText2=Нажмите «Завершить», чтобы выйти из программы установки.
-en.ProgressPage1a=Performing the installation
-tr.ProgressPage1a=Выполнение установки
-en.ProgressPage1b=Please wait...
-tr.ProgressPage1b=Пожалуйста, подождите...
-en.FoundGameLoc1=DELTARUNE (Chapters 1-4) was not found in the default folders. Please specify the path manually.
-tr.FoundGameLoc1=DELTARUNE (главы 1-4) не найден в стандартных папках. Пожалуйста, укажите путь вручную.
-en.FoundGameLoc2="DELTARUNE.exe" was not found in the specified folder!
-tr.FoundGameLoc2=Не найден "DELTARUNE.exe" в указанной папке!
-en.ProgressPage2a= MB
-tr.ProgressPage2a= МБ
-en.ProgressPage2b=File size: 
-tr.ProgressPage2b=Размер файла: 
-en.FirstLogLine1=Error applying patch: 
-tr.FirstLogLine1=Ошибка применения патча: 
-en.FirstLogLine2=The installer log is saved to the file "
-tr.FirstLogLine2=Лог установщика сохранён в файл "
-en.ExceptionMsg1a=Unable to unpack archive "%s" due to an unknown error.
-tr.ExceptionMsg1a=Не удалось распаковать архив "%s" из-за неизвестной ошибки.
-en.ExceptionMsg1b=Unpacking path - 
-tr.ExceptionMsg1b=Путь распаковки - 
-en.ExceptionMsg2a=Unable to unpack archive "%s" - file(s) cannot be accessed, possibly because they are being used by another process.
-tr.ExceptionMsg2a=Не удалось распаковать архив "%s" - нет доступа к файлу(-ам), возможно, он(и) занят(ы) другим процессом.
-en.ExceptionMsg2b=If the game folder has the "Read-only" attribute, then remove it (don't forget to "Apply") and try again.
-tr.ExceptionMsg2b=Если у папки с игрой стоит атрибут "Только для чтения", тогда уберите его (не забудьте "Применить") и попробуйте снова.
-en.RaiseException1=Archive file not found, path - 
-tr.RaiseException1=Файл архива не найден, путь - 
-en.DownloadToTempWithMirror1=Downloading language files...
-tr.DownloadToTempWithMirror1=Загрузка языковых файлов...
-en.DownloadToTempWithMirror2=Downloading scripts...
-tr.DownloadToTempWithMirror2=Загрузка скриптов...
-en.DownloadToTempWithMirror3=An error occurred while downloading files: 
-tr.DownloadToTempWithMirror3=В процессе скачивания файлов произошла ошибка: 
-en.ProgressPage3a=Unpacking the patcher...
-tr.ProgressPage3a=Распаковка патчера...
-en.ProgressPage3b=Unpacking language files...
-tr.ProgressPage3b=Распаковка языковых файлов...
-en.ProgressPage3c=Unpacking scripts...
-tr.ProgressPage3c=Распаковка скриптов...
-en.ProgressPage3d=Applying the patch...
-tr.ProgressPage3d=Применение патча...
-en.HandlePatcherError1=Error applying patch, error code: 
-tr.HandlePatcherError1=Ошибка применения патча, код ошибки: 
-en.HandlePatcherError2=Failed to start patcher.
-tr.HandlePatcherError2=Не удалось запустить патчер.
-en.ExceptionMsg3=An error occurred during installation: 
-tr.ExceptionMsg3=В процессе установки произошла ошибка: 
-en.FinishedText3a=Unable to install DELTARUNE Translation due to an error.
-tr.FinishedText3a=Не удалось установить русификатор DELTARUNE из-за ошибки.
-en.FinishedText3b=Click «Finish» to exit the setup program.
-tr.FinishedText3b=Нажмите «Завершить», чтобы выйти из программы установки
-en.FinishedHeadingLabel1=Completing the installation of the DELTARUNE Translation
-tr.FinishedHeadingLabel1=Завершение установки русификатора DELTARUNE
-en.OfflineQuestion1=lang.7z file found next to installer. Use it instead of downloading it?
-tr.OfflineQuestion1=lang.7z file found next to installer. Use it instead of downloading it?     //todo: translate to Russian
-en.OfflineQuestion2=scripts.7z file found next to installer. Use it instead of downloading it?
-tr.OfflineQuestion2=scripts.7z file found next to installer. Use it instead of downloading it?  //todo: translate to Russian
-en.wpWelcome11=If you have the translation and script files you can install them without connecting to the Internet. Just rename the translation archive to "lang.7z" and place it and the "scripts.7z" file next to the installer file.
-tr.wpWelcome11=If you have the translation and script files you can install them without connecting to the Internet. Just rename the translation archive to "lang.7z" and place it and the "scripts.7z" file next to the installer file.  //todo: translate to Russian
-en.wpWelcome12=You can download them from here:
-tr.wpWelcome12=You can download them from here: //todo: translate to Russian
+
+tr.WelcomeLabel1=Welcome to the (your lang) DELTRANSLATE installation wizard
+tr.WelcomeLabel2=This wizard will install the (put your lang or something like that) translation for the DELTARUNE.
+tr.wpWelcome1=Installation Description
+tr.wpWelcome2=What will be installed?
+tr.wpWelcome3=Installation of the translation includes:
+tr.wpWelcome4= - Installing Deltranslate
+tr.wpWelcome5= - Full translation of Chapter 1
+tr.wpWelcome6= - Full translation of Chapter 2
+tr.wpWelcome7= - Full translation of Chapter 3
+tr.wpWelcome8= - Full translation of Chapter 4
+tr.wpWelcome9=The translation will be applied over your current game installation.
+tr.wpWelcome10=All game saves will remain intact.
+tr.CreateInputDirPage1=Select the DELTARUNE folder
+tr.CreateInputDirPage2=Where is the game installed?
+tr.CreateInputDirPage3=Select the folder containing "DELTARUNE.exe" and the "chapter1_windows" ... "chapter4_windows" folders.
+tr.CreateInputDirPage4=Typically it looks like this: 
+tr.FinishedText1=The (your lang) translation has been successfully installed on your computer.
+tr.FinishedText2=Click «Finish» to exit the setup program.
+tr.ProgressPage1a=Performing the installation
+tr.ProgressPage1b=Please wait...
+tr.FoundGameLoc1=DELTARUNE (Chapters 1-4) was not found in the default folders. Please specify the path manually.
+tr.FoundGameLoc2="DELTARUNE.exe" was not found in the specified folder!
+tr.ProgressPage2a= MB
+tr.ProgressPage2b=File size: 
+tr.FirstLogLine1=Error applying patch: 
+tr.FirstLogLine2=The installer log is saved to the file
+tr.ExceptionMsg1a=Unable to unpack archive "%s" due to an unknown error.
+tr.ExceptionMsg1b=Unpacking path - 
+tr.ExceptionMsg2a=Unable to unpack archive "%s" - file(s) cannot be accessed, possibly because they are being used by another process.
+tr.ExceptionMsg2b=If the game folder has the "Read-only" attribute, then remove it (don't forget to "Apply") and try again.
+tr.RaiseException1=Archive file not found, path - 
+tr.DownloadToTempWithMirror1=Downloading language files...
+tr.DownloadToTempWithMirror2=Downloading scripts...
+tr.DownloadToTempWithMirror3=An error occurred while downloading files: 
+tr.ProgressPage3a=Unpacking the patcher...
+tr.ProgressPage3b=Unpacking language files...
+tr.ProgressPage3c=Unpacking scripts...
+tr.ProgressPage3d=Applying the patch...
+tr.HandlePatcherError1=Error applying patch, error code: 
+tr.HandlePatcherError2=Failed to start patcher.
+tr.ExceptionMsg3=An error occurred during installation: 
+tr.FinishedText3a=Unable to install DELTARUNE Translation due to an error.
+tr.FinishedText3b=Click «Finish» to exit the setup program.
+tr.FinishedHeadingLabel1=Completing the installation of the DELTARUNE Translation
+tr.OfflineQuestion1=lang.7z file found next to installer. Use it instead of downloading it?
+tr.OfflineQuestion2=scripts.7z file found next to installer. Use it instead of downloading it?
+tr.wpWelcome11=If you have the translation and script files you can install them without connecting to the Internet. Just rename the translation archive to "lang.7z" and place it and the "scripts.7z" file next to the installer file.
+tr.wpWelcome12=You can download them from here:
 
 [Files]
 Source: "DeltaPatcherCLI.7z"; DestDir: "{tmp}"; Flags: deleteafterinstall
 
 [Code]
 const
-  LangURL = 'https://github.com/Lazy-Desman/DeltaruneRus/releases/download/latest/lang.7z';
-  LangURLMirror = 'https://github.com/Lazy-Desman/DeltaruneRus/releases/download/latest/lang.7z';
+  LangURL = 'https://github.com/Lazy-Desman/EngDeltranslatePack/releases/download/latest/lang.7z';
+  LangURLMirror = 'https://github.com/Lazy-Desman/EngDeltranslatePack/releases/download/latest/lang.7z';
   ScriptsURL = 'https://github.com/Lazy-Desman/DeltranslatePatch/releases/download/latest/scripts.7z';
   ScriptsURLMirror = 'https://github.com/Lazy-Desman/DeltranslatePatch/releases/download/latest/scripts.7z';
   
@@ -346,7 +298,7 @@ begin
         
         MsgBox(CustomMessage('FirstLogLine1') + FirstLogLine + #13#10
                + #13#10 +
-               CustomMessage('FirstLogLine2') + LogPath + '".', mbError, MB_OK);
+               CustomMessage('FirstLogLine2') + ' "' + LogPath + '".', mbError, MB_OK);
         Result := True;
         Exit;
       end;

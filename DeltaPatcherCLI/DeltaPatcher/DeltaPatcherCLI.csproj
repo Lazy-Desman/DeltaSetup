@@ -5,26 +5,24 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <!-- Настройки для единого EXE-файла -->
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-    <!-- PDB внутри .exe -->
     <DebugType>embedded</DebugType>
-    <!-- Системные ресурсы (текст ошибок) только для русского языка -->
-    <NeutralLanguage>ru</NeutralLanguage>
-    <ResourceLanguages>ru</ResourceLanguages>
-    <SatelliteResourceLanguages>ru</SatelliteResourceLanguages>
+    <!-- Change here to your lang code -->
+    <NeutralLanguage>en</NeutralLanguage>
+    <ResourceLanguages>en</ResourceLanguages>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.3.3</Version>
+    <Version>1.4.0</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-    <Product>Установщик DelTranslate</Product>
-    <AssemblyTitle>DelTranslatePatcherCLI</AssemblyTitle>
+    <Product>Deltranslate Installer</Product>
+    <AssemblyTitle>DeltraPatcherCLI</AssemblyTitle>
     <CompanyName>LazyDesman</CompanyName>
     <Copyright>Copyright 2025</Copyright>
   </PropertyGroup>
@@ -41,37 +39,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="LocalizedText.ru.Designer.cs">
-      <DependentUpon>LocalizedText.ru.resx</DependentUpon>
+    <Compile Update="LocalizedText.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="LocalizedText.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>LocalizedText.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="LocalizedText.ru.resx">
-      <LastGenOutput>LocalizedText.ru.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="LocalizedText.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LocalizedText.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <!-- UndertaleModLib почему-то игнорирует `<GenerateDocumentationFile>false</GenerateDocumentationFile>` -->
-  <!-- TODO: никак не сделать чтобы заработало -->
   <Target Name="DeleteXML" AfterTargets="AfterPublish">
     <Message Text="$(PublishDir)UndertaleModLib.xml" Importance="high" />
     <Exec Command="del /F /Q $(PublishDir)UndertaleModLib.xml" IgnoreExitCode="true" />
   </Target>
 
-  <!-- Оптимизация размера -->
   <PropertyGroup>
     <TrimMode>copyused</TrimMode>
     <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>

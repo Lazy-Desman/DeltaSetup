@@ -29,12 +29,10 @@ class Program
 
         try
         {
-            WriteLine(LocalizedText.Welcome1);	//"DELTARUNE Russian Patcher CLI"
-            WriteLine($"Version {Version}");
-            WriteLine("Developed by LazyDesman");
+            WriteLine(LocalizedText.Welcome1);	            WriteLine(string.Format(LocalizedText.Version1, Version));
+            WriteLine(LocalizedText.DevelopedBy1);
             WriteLine("-----------------------------------");
 
-            // parsing arguments	//парсим аргументы
             for (int i = 0; i < args.Length; i++)
             {
                 if (args[i] == "--game" && i + 1 < args.Length)
@@ -43,21 +41,19 @@ class Program
                     scriptsPath = args[++i];
             }
 
-            // reference	//справка
             if (string.IsNullOrEmpty(gamePath) || string.IsNullOrEmpty(scriptsPath))
             {
-                WriteLine(LocalizedText.Usage1);	//"Использование:"
-                WriteLine(LocalizedText.Usage2);	//"DeltarunePatcherCLI.exe --game \"путь_к_игре\" --scripts \"путь_к_скриптам\""
+                WriteLine(LocalizedText.Usage1);
+                WriteLine(LocalizedText.Usage2);
                 WriteLine();
-                WriteLine(LocalizedText.Usage3);	//"Пример:"
+                WriteLine(LocalizedText.Usage3);
                 WriteLine("DeltarunePatcherCLI.exe --game \"C:\\Games\\DELTARUNE\" --scripts \"C:\\Temp\\scripts\"");
                 Environment.Exit(0);
             }
 
-            // delta check	//проверка дельты
             if (!ValidatePaths(gamePath, scriptsPath))
             {
-                WriteLine(LocalizedText.PathError1); //"Патч не может быть применён из-за ошибок в путях."
+                WriteLine(LocalizedText.PathError1);
                 Environment.Exit(1);
             }
 
@@ -72,12 +68,9 @@ class Program
                                            typeof(Underanalyzer.Decompiler.DecompileContext).Assembly)
                             .WithFileEncoding(Encoding.UTF8);
 
-            //Disable the ability to quickly select text with the mouse,    // Отключить возможность быстрого выбора текста мышью,
-            //to prevent freezing due to accidental selection.              // чтобы предотвратить зависание при случайном выделении.
-            ConsoleQuickEditSwitcher.SwitchQuickMode(false);
+                                    ConsoleQuickEditSwitcher.SwitchQuickMode(false);
 
-            //apply the patch   // применяем патч
-            await ApplyChapterPatch(gamePath, scriptsPath, "Menu", "data.win");
+                        await ApplyChapterPatch(gamePath, scriptsPath, "Menu", "data.win");
             await ApplyChapterPatch(gamePath, scriptsPath, "Chapter1", @"chapter1_windows\data.win");
             await ApplyChapterPatch(gamePath, scriptsPath, "Chapter2", @"chapter2_windows\data.win");
             await ApplyChapterPatch(gamePath, scriptsPath, "Chapter3", @"chapter3_windows\data.win");
@@ -88,9 +81,7 @@ class Program
 
             WriteLine("-----------------------------------");
             
-            WriteLine(LocalizedText.PatchSuccess1);     //"Патч успешно применён!"
-            WriteLine(LocalizedText.PatchSuccess2);     //"Теперь можно запускать игру с русским переводом"
-            Environment.Exit(0);
+            WriteLine(LocalizedText.PatchSuccess1);                 WriteLine(LocalizedText.PatchSuccess2);                 Environment.Exit(0);
         }
         catch (Exception ex)
         {
@@ -99,14 +90,12 @@ class Program
             if (ex is ScriptException)
             {
                 WriteLine("-----------------------------------");
-                WriteLine($"{LocalizedText.ScriptError1}");  //"Ошибка скрипта:"
-                WriteLine(ex.Message);
+                WriteLine($"{LocalizedText.ScriptError1}");                  WriteLine(ex.Message);
             }
             else
             {
                 WriteLine("-----------------------------------");
-                WriteLine(LocalizedText.CriticalError1);   //"КРИТИЧЕСКАЯ ОШИБКА:"
-                WriteLine(ex.Message);
+                WriteLine(LocalizedText.CriticalError1);                   WriteLine(ex.Message);
 
                 if (ex.InnerException != null)
                 {
@@ -130,14 +119,11 @@ class Program
                 File.WriteAllText(logPath, logText, Encoding.UTF8);
 
                 WriteLine("-----------------------------------");
-                WriteLine($"{LocalizedText.ErrorLog1} \"{logPath}\"."); //"Детали ошибки и лог установщика сохранены в файл: \"{logPath}\"."
-            }
+                WriteLine($"{LocalizedText.ErrorLog1} \"{logPath}\".");             }
             catch
             {
                 WriteLine("-----------------------------------");
-                WriteLine($"{LocalizedText.ErrorLog2} \"{logPath}\".");     //"Не удалось записать лог установщика в файл "{logPath}"."
-                WriteLine(LocalizedText.ErrorLog3);                  //"(нажмите любую клавишу для завершения программы)"
-                Console.ReadKey();
+                WriteLine($"{LocalizedText.ErrorLog2} \"{logPath}\".");                     WriteLine(LocalizedText.ErrorLog3);                                  Console.ReadKey();
             }
             
             Environment.Exit(2);
@@ -165,8 +151,7 @@ class Program
         }
         catch
         {
-            WriteLine($"{LocalizedText.ReadonlyWarning1} \"{Path.GetFileName(filePath)}\".");    //"Внимание - не удалось проверить наличие атрибута (или убрать) \"Только чтение\" у файла \"{Path.GetFileName(filePath)}\"."
-        }
+            WriteLine($"{LocalizedText.ReadonlyWarning1} \"{Path.GetFileName(filePath)}\".");            }
     }
     public static void FileCopyNoRO(string sourceFileName, string destFileName, bool overwrite = false)
     {
@@ -183,37 +168,27 @@ class Program
     {
         try
         {
-            WriteLine(LocalizedText.ValidatePath1);                     //"Проверка путей..."
-            WriteLine($"{LocalizedText.ValidatePath2} {gamePath}");            //"- Папка игры: {gamePath}"
-            WriteLine($"{LocalizedText.ValidatePath3} {scriptsPath}");      //"- Папка скриптов: {scriptsPath}"
-
-            //checking for folder existence // проверка существования папок
-            if (!Directory.Exists(gamePath))
+            WriteLine(LocalizedText.ValidatePath1);                                 WriteLine($"{LocalizedText.ValidatePath2} {gamePath}");                        WriteLine($"{LocalizedText.ValidatePath3} {scriptsPath}");      
+                        if (!Directory.Exists(gamePath))
             {
-                WriteLine(LocalizedText.ValidatePath4);  //"ОШИБКА: Папка игры не найдена"
-                return false;
+                WriteLine(LocalizedText.ValidatePath4);                  return false;
             }
 
             if (!Directory.Exists(scriptsPath))
             {
-                WriteLine(LocalizedText.ValidatePath5);    //"ОШИБКА: Папка со скриптами не найдена"
-                return false;
+                WriteLine(LocalizedText.ValidatePath5);                    return false;
             }
 
-            //Delta 2 check // проверка дельты 2
-            if (!File.Exists(Path.Combine(gamePath, "DELTARUNE.exe")))
+                        if (!File.Exists(Path.Combine(gamePath, "DELTARUNE.exe")))
             {
-                WriteLine(LocalizedText.ValidatePath6);    //"ОШИБКА: DELTARUNE.exe не найден"
-                return false;
+                WriteLine(LocalizedText.ValidatePath6);                    return false;
             }
 
-            WriteLine(LocalizedText.ValidatePath7); //"Все пути корректны"
-            return true;
+            WriteLine(LocalizedText.ValidatePath7);             return true;
         }
         catch (Exception ex)
         {
-            WriteLine($"{LocalizedText.ValidatePath8} {ex.Message}");   //"Ошибка при проверке путей: {ex.Message}"
-            return false;
+            WriteLine($"{LocalizedText.ValidatePath8} {ex.Message}");               return false;
         }
     }
 
@@ -225,30 +200,22 @@ class Program
             string scriptPath = Path.Combine(scriptsPath, chapter, "Fix.csx");
 
             WriteLine();
-            WriteLine($"===== {LocalizedText.ApplyPatch1} {chapter.ToUpper()} =====");    //"===== ПАТЧИНГ ГЛАВЫ: {chapter.ToUpper()} ====="
-            WriteLine($"{LocalizedText.ApplyPatch2} {dataWinPath}");                           //"- Файл игры: {dataWinPath}"
-            WriteLine($"{LocalizedText.ApplyPatch3} {scriptPath}");                         //"- Скрипт патча: {scriptPath}"
-
-            //game check    // проверка игры
-            if (!File.Exists(dataWinPath))
+            WriteLine($"===== {LocalizedText.ApplyPatch1} {chapter.ToUpper()} =====");                WriteLine($"{LocalizedText.ApplyPatch2} {dataWinPath}");                                       WriteLine($"{LocalizedText.ApplyPatch3} {scriptPath}");                         
+                        if (!File.Exists(dataWinPath))
             {
-                throw new FileNotFoundException($"{LocalizedText.ApplyPatch4} {dataWinPath}");     //"Файл игры не найден: {dataWinPath}"
-            }
+                throw new FileNotFoundException($"{LocalizedText.ApplyPatch4} {dataWinPath}");                 }
 
             if (!File.Exists(scriptPath))
             {
-                throw new FileNotFoundException($"{LocalizedText.ApplyPatch5} {scriptPath}");   //"Скрипт патча не найден: {scriptPath}"
-            }
+                throw new FileNotFoundException($"{LocalizedText.ApplyPatch5} {scriptPath}");               }
 
-            WriteLine(LocalizedText.ApplyPatch6);     //"- Чтение data.win..."
-            UndertaleData data;
+            WriteLine(LocalizedText.ApplyPatch6);                 UndertaleData data;
             using (var fileStream = File.OpenRead(dataWinPath))
             {
                 data = UndertaleIO.Read(fileStream);
             }
 
-            WriteLine(LocalizedText.ApplyPatch7);     //"- Применение скрипта..."
-            var script = File.ReadAllText(scriptPath);
+            WriteLine(LocalizedText.ApplyPatch7);                 var script = File.ReadAllText(scriptPath);
 
             ScriptGlobals scriptGlobals = new()
             {
@@ -257,8 +224,7 @@ class Program
                 ScriptPath = scriptPath
             };
 
-            //We tell the compiler (when trimming) that all methods (including getters) are used    // Говорим компилятору (при trimming) что все методы (включая getter'ы) используются
-            object prop = scriptGlobals.Data;
+                        object prop = scriptGlobals.Data;
             prop = scriptGlobals.FilePath;
             prop = scriptGlobals.ScriptPath;
             scriptGlobals.ScriptMessage(null, true);
@@ -277,26 +243,22 @@ class Program
                                                  baseDirectory: Path.GetDirectoryName(Path.GetFullPath(scriptPath)));
             await CSharpScript.RunAsync(script, scriptOptions.WithSourceResolver(srcResolver), globals: scriptGlobals);
 
-            WriteLine(LocalizedText.ApplyPatch8);     //"- Сохранение изменений..."
-            using (var fileStream = FileCreateNoRO(dataWinPath))
+            WriteLine(LocalizedText.ApplyPatch8);                 using (var fileStream = FileCreateNoRO(dataWinPath))
             {
                 UndertaleIO.Write(fileStream, data);
             }
 
-            //Clearing residual data in memory  // Очистка остаточных данных в памяти
-            scriptGlobals.Data = null;
+                        scriptGlobals.Data = null;
             data.Dispose();
 
             GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            WriteLine($"- {chapter} {LocalizedText.ApplyPatch9}");    //"- Глава {chapter} успешно пропатчена!"
-        }
+            WriteLine($"- {chapter} {LocalizedText.ApplyPatch9}");            }
         catch (Exception ex)
         {
-            WriteLine($"{LocalizedText.ApplyPatchError1} {chapter}:");      //"!!! ОШИБКА ПРИ ПАТЧИНГЕ ГЛАВЫ {chapter}:"
-            WriteLine(ex.Message);
+            WriteLine($"{LocalizedText.ApplyPatchError1} {chapter}:");                  WriteLine(ex.Message);
 
             if (ex.InnerException != null)
             {
@@ -309,16 +271,12 @@ class Program
     }
 }
 
-//we pass data to scripts   // передаём данные в скрипты
 public class ScriptGlobals
 {
-    /// <inheritdoc />
-    public class ScriptException : UndertaleModLib.Scripting.ScriptException
+        public class ScriptException : UndertaleModLib.Scripting.ScriptException
     {
-        /// <inheritdoc />
-        public ScriptException() : base() { }
-        /// <inheritdoc />
-        public ScriptException(string msg) : base(msg) { }
+                public ScriptException() : base() { }
+                public ScriptException(string msg) : base(msg) { }
     }
 
     public UndertaleData Data { get; set; }
@@ -327,8 +285,7 @@ public class ScriptGlobals
 
     public void SyncBinding(string resourceType, bool enable)
     {
-        // There is no GUI with WPF bindings
-    }
+            }
 
     public void ScriptMessage(string message, bool dummy = false)
     {
@@ -338,26 +295,22 @@ public class ScriptGlobals
     public void ScriptWarning(string message, bool dummy = false)
     {
         if (!dummy)
-            Program.WriteLine($"[{LocalizedText.Warning1}] {message}");  //"[ПРЕДУПРЕЖДЕНИЕ] {message}"
-    }
+            Program.WriteLine($"[{LocalizedText.Warning1}] {message}");      }
     public void ScriptError(string message, bool dummy = false)
     {
         if (!dummy)
         {
-            string text = $"[{LocalizedText.Error1}] {message}";    //"[ОШИБКА] {message}"
-            Program.WriteLine(text, onlyToFile: true);
+            string text = $"[{LocalizedText.Error1}] {message}";                Program.WriteLine(text, onlyToFile: true);
             Console.Error.WriteLine(text);
         }
     }
 
-    // TODO?
-    public void SetProgressBar(string message, string status, double currentValue, double maxValue) { }
+        public void SetProgressBar(string message, string status, double currentValue, double maxValue) { }
     public void UpdateProgressValue(double currentValue) { }
     public void IncrementProgress() { }
     public int GetProgress() => -1;
 
-    // Not in `IScriptInterface`
-    public void ShowMessage(string message, bool dummy = false)
+        public void ShowMessage(string message, bool dummy = false)
     {
         if (!dummy)
             Win32API.ShowMessage(message);
