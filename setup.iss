@@ -1,19 +1,21 @@
 [Setup]
 AppName=DELTARUNE (your lang) Translation Installer
-AppVersion=1.5.0
+AppVersion=1.6.0
 AppPublisher=LazyDesman
 DefaultDirName={autopf}\DELTARUNE Translation Patch
 OutputBaseFilename=DeltaruneTranslationInstaller
 Compression=lzma2/ultra64
 SolidCompression=yes
 SetupIconFile=icon.ico
-WizardStyle=modern
+WizardStyle=modern dynamic
 ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 DisableDirPage=yes
 DisableWelcomePage=no
 WizardSmallImageFile=logo.bmp
 WizardImageFile=banner.bmp
+WizardSmallImageFileDynamicDark=logo.bmp
+WizardImageFileDynamicDark=banner.bmp
 // SetupLogging=True
 ShowLanguageDialog=yes
 UsePreviousLanguage=no
@@ -28,7 +30,7 @@ tr.ExitSetupMessage=The installation is not complete. If you exit, the translati
 [CustomMessages]
 
 tr.WelcomeLabel1=Welcome to the (your lang) DELTRANSLATE installation wizard
-tr.WelcomeLabel2=This wizard will install the (put your lang or something like that) translation for the DELTARUNE.
+tr.WelcomeLabel2=This wizard will install the (put your lang or something like that) translation for DELTARUNE.
 tr.wpWelcome1=Installation Description
 tr.wpWelcome2=What will be installed?
 tr.wpWelcome3=Installation of the translation includes:
@@ -75,6 +77,7 @@ tr.OfflineQuestion1=lang.7z file found next to installer. Use it instead of down
 tr.OfflineQuestion2=scripts.7z file found next to installer. Use it instead of downloading it?
 tr.wpWelcome11=If you have the translation and script files you can install them without connecting to the Internet. Just rename the translation archive to "lang.7z" and place it and the "scripts.7z" file next to the installer file.
 tr.wpWelcome12=You can download them from here:
+tr.DeltaQuick1= Apply the translation mod to DeltaQuick apks.
 
 [Files]
 Source: "DeltaPatcherCLI.7z"; DestDir: "{tmp}"; Flags: deleteafterinstall
@@ -95,6 +98,9 @@ var
   FinishedText: String;
   ForceClose: Boolean;
   ExistingDrives: TArrayOfString;
+  // a drop-down would be better, but this is fine for now
+  InfoCheckbox: TNewCheckBox;
+  PatchDeltaQuick: Boolean;
 
 procedure InitExistingDrives;
 var
@@ -193,6 +199,16 @@ begin
     LangURL + #13#10 +
     ScriptsURL
   );
+  InfoCheckbox := TNewCheckBox.Create(InfoPage);
+    with InfoCheckbox do
+    begin
+      Parent := InfoPage.Surface;
+      Top := InfoPage.SurfaceHeight - Height - 8; 
+      Left := 0;
+      Width := InfoPage.SurfaceWidth;
+      Caption := CustomMessage('DeltaQuick1');
+      Checked := False;
+    end;
 
   GamePathPage := CreateInputDirPage(
     InfoPage.ID,
@@ -222,8 +238,10 @@ begin
   
   if CurPageID = InfoPage.ID then
   begin
+    PatchDeltaQuick := InfoCheckbox.Checked;
+    
     FoundGameLoc := FindGameLocation();
-    if FoundGameLoc = '' then
+    if (FoundGameLoc = '') and (not PatchDeltaQuick) then
     begin
       MsgBox(CustomMessage('FoundGameLoc1'), mbInformation, MB_OK);
       Exit;
@@ -231,7 +249,7 @@ begin
   end
   else if CurPageID = GamePathPage.ID then
   begin
-    if not FileExists(AddBackslash(GamePathPage.Values[0]) + DeltaruneExe) then
+    if (not FileExists(AddBackslash(GamePathPage.Values[0]) + DeltaruneExe)) and (not PatchDeltaQuick) then
     begin
       MsgBox(CustomMessage('FoundGameLoc2'), mbError, MB_OK);
       Result := False;
@@ -383,7 +401,7 @@ end;
 
 function DownloadAndExtractFiles(): Boolean;
 var
-  LangZipPath, ScriptsZipPath, PatcherZipPath, GamePath, PatcherPath, ExceptionMsg: String;
+  LangZipPath, ScriptsZipPath, PatcherZipPath, GamePath, PatcherPath, ExceptionMsg, ArgString: String;
   ResultCode: Integer;
 begin
   LangZipPath := ExpandConstant('{tmp}\lang.7z');
@@ -442,7 +460,15 @@ begin
     
     ProgressPage.SetText(CustomMessage('ProgressPage3d'), '');
     PatcherPath := ExpandConstant('{tmp}\DeltaPatcherCLI.exe');
-    if Exec(PatcherPath, Format('--game "%s" --scripts "%s"', [GamePath, ExpandConstant('{tmp}\scripts')]), '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+    if PatchDeltaQuick then
+    begin
+      ArgString := ' --droid';
+    end
+    else
+    begin
+      ArgString := '';
+    end;
+    if Exec(PatcherPath, Format('--game "%s" --scripts "%s"%s', [GamePath, ExpandConstant('{tmp}\scripts'), ArgString]), '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
     begin
       if ResultCode <> 0 then
       begin

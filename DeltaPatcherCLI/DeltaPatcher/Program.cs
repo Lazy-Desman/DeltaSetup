@@ -21,6 +21,7 @@ class Program
     private static readonly string Version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
     private static readonly StringBuilder outputTextBuilder = new();
     private static bool writeOutputToFile = true;
+    private static bool droid = false;
 
     private static async Task Main(string[] args)
     {
@@ -39,6 +40,8 @@ class Program
                     gamePath = args[++i];
                 else if (args[i] == "--scripts" && i + 1 < args.Length)
                     scriptsPath = args[++i];
+                else if (args[i] == "--droid")
+                    droid = true;
             }
 
             if (string.IsNullOrEmpty(gamePath) || string.IsNullOrEmpty(scriptsPath))
@@ -70,12 +73,43 @@ class Program
 
                                     ConsoleQuickEditSwitcher.SwitchQuickMode(false);
 
-                        await ApplyChapterPatch(gamePath, scriptsPath, "Menu", "data.win");
-            await ApplyChapterPatch(gamePath, scriptsPath, "Chapter1", @"chapter1_windows\data.win");
-            await ApplyChapterPatch(gamePath, scriptsPath, "Chapter2", @"chapter2_windows\data.win");
-            await ApplyChapterPatch(gamePath, scriptsPath, "Chapter3", @"chapter3_windows\data.win");
-            await ApplyChapterPatch(gamePath, scriptsPath, "Chapter4", @"chapter4_windows\data.win");
+            if (!droid) {
+                await ApplyChapterPatch(gamePath, scriptsPath, "Menu", "data.win");
+                await ApplyChapterPatch(gamePath, scriptsPath, "Chapter1", @"chapter1_windows\data.win");
+                await ApplyChapterPatch(gamePath, scriptsPath, "Chapter2", @"chapter2_windows\data.win");
+                await ApplyChapterPatch(gamePath, scriptsPath, "Chapter3", @"chapter3_windows\data.win");
+                await ApplyChapterPatch(gamePath, scriptsPath, "Chapter4", @"chapter4_windows\data.win");
+            } else {
+                 Apk.ExtractEmbeddedJar("apktool.jar");
+                 if (!Directory.Exists(gamePath + @"\translated")) {
+                     Directory.CreateDirectory(gamePath + @"\translated");
+                 }
+                 FileInfo[] files = new DirectoryInfo(gamePath).GetFiles("*.apk");
+                 foreach (FileInfo file in files) {
+                     Apk.RunCommand("java", "-jar " + Path.GetTempPath() + $"apktool.jar d -r \"{file.FullName}\" -o \"{gamePath + @"\" + file.Name.Replace(".apk", "")}\" -f");
+                     switch (file.Name) {
+                         case "selector.apk":
+                             await ApplyChapterPatch(gamePath, scriptsPath, "Menu", file.Name.Replace(".apk", "") + @"\assets\game.droid");
+                             break;
+                         case "chapter1_windows.apk":
+                             await ApplyChapterPatch(gamePath, scriptsPath, "Chapter1", file.Name.Replace(".apk", "") + @"\assets\game.droid");
+                             break;
+                         case "chapter2_windows.apk":
+                             await ApplyChapterPatch(gamePath, scriptsPath, "Chapter2", file.Name.Replace(".apk", "") + @"\assets\game.droid");
+                             break;
+                         case "chapter3_windows.apk":
+                             await ApplyChapterPatch(gamePath, scriptsPath, "Chapter3", file.Name.Replace(".apk", "") + @"\assets\game.droid");
+                             break;
+                         case "chapter4_windows.apk":
+                             await ApplyChapterPatch(gamePath, scriptsPath, "Chapter4", file.Name.Replace(".apk", "") + @"\assets\game.droid");
+                             break;
+                     }
 
+                     Apk.RunCommand("java", "-jar " + Path.GetTempPath() + $"apktool.jar b \"{gamePath + @"\" + file.Name.Replace(".apk", "")}\" -o \"{gamePath + @"\translated\" + file.Name}\"");
+        
+                     new DirectoryInfo(gamePath + @"\" + file.Name.Replace(".apk", "")).Delete(true);
+                 }
+            }
 
             ConsoleQuickEditSwitcher.SwitchQuickMode(true);
 
@@ -179,7 +213,7 @@ class Program
                 WriteLine(LocalizedText.ValidatePath5);                    return false;
             }
 
-                        if (!File.Exists(Path.Combine(gamePath, "DELTARUNE.exe")))
+            if (!File.Exists(Path.Combine(gamePath, "DELTARUNE.exe")) && !droid)
             {
                 WriteLine(LocalizedText.ValidatePath6);                    return false;
             }
