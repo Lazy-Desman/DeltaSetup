@@ -11,7 +11,7 @@
 #      - sctipts.7z (REQUIRED)
 #      - borders.7z (OPTIONAL, only if you want to enable borders)
 #    - from here: https://github.com/roberd82/DeltranslatePatch-Optional/releases/tag/latest
-#      - quicktale.7z (OPTIONAL, only if you want to make DeltaQuick packs for Android)
+#      - deltaquick.7z (OPTIONAL, only if you want to make DeltaQuick packs for Android)
 #    - from here: https://github.com/iBotPeaches/Apktool/releases/latest
 #      - the latest apktool.jar (OPTIONAL, only if you want to make DeltaQuick packs
 #        for Android. Also you need to have Java JRE installed:
@@ -24,7 +24,7 @@
 #    - DELTARUNE.app
 #    - DeltaPatcherCLI.sh
 #    - DeltaPatcherCLI
-#    - scripts <- copy the contents of quicktale.7z into this folder and let it override everything
+#    - scripts <- copy the contents of deltaquick.7z into this folder and let it override everything
 #    - lang
 #    - borders
 #    - apktool.jar <- remove the version number from the file name
@@ -55,12 +55,12 @@ EXE_PATH="${SCRIPT_DIR}/${EXE_NAME}"
 GAME_PATH="${SCRIPT_DIR}/DELTARUNE.app"
 
 # Output directory (optional). Where the lang folder will be copied, and where the packs folder will
-# be created when creating QuickTale pack files. If left blank defaults to GAME_PATH.
+# be created when creating DeltaQuick pack files. If left blank defaults to GAME_PATH.
 OUTPUT_PATH=""
 
 # Set the target platform of the patching, avalible options:
 # - "" (blank): Windows
-# - "--droid": QuickTale on Android
+# - "--droid": DeltaQuick on Android
 # - "--mac": macOS
 PLATFORM_FLAG="--mac"
 

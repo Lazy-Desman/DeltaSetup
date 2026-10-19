@@ -332,7 +332,7 @@ internal class Program
                 var moreChanges = await File.ReadAllTextAsync(Path.Join(scriptsPath, moreChangesName));
                 var codeChanges = "";
                 if (File.Exists(codePath))
-                    codeChanges += await File.ReadAllTextAsync(codePath) + "\n";
+                    codeChanges += await File.ReadAllTextAsync(codePath) + "\n\n";
                 await File.WriteAllTextAsync(codePath, codeChanges + moreChanges);
                 moreChangesName = "More" + moreChangesName;
             }
@@ -618,7 +618,7 @@ internal class Program
                 continue;
             
             var destSubDir = Path.Combine(destDir, Path.GetFileName(dir));
-            CopyDirectory(dir, destSubDir);
+            CopyDirectory(dir, destSubDir, excludedPaths);
         }
     }
 
@@ -694,7 +694,7 @@ internal class Program
                 var moreChanges = await File.ReadAllTextAsync(Path.Join(scriptsPath, chapter, moreChangesName));
                 var codeChanges = "";
                 if (File.Exists(codePath))
-                    codeChanges += await File.ReadAllTextAsync(codePath) + "\n";
+                    codeChanges += await File.ReadAllTextAsync(codePath) + "\n\n";
                 await File.WriteAllTextAsync(codePath, codeChanges + moreChanges);
                 moreChangesName = "More" + moreChangesName;
             }
