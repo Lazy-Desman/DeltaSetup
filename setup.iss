@@ -180,7 +180,7 @@ end;
 procedure InitPlatforms;
 begin
   AddPlatform('PlatformWindows',        '',  True, False, False, []);
-  AddPlatform('PlatformAndroid', '--droid', False,  True,  True, ['https://github.com/roberd82/DeltranslatePatch-Optional/releases/download/latest/quicktale.7z']);
+  AddPlatform('PlatformAndroid', '--droid', False,  True,  True, ['https://github.com/roberd82/DeltranslatePatch-Optional/releases/download/latest/deltaquick.7z']);
   AddPlatform('PlatformMac',       '--mac', False, False, False, []);
   //AddPlatform('PlatformLinux',   '--linux', False, False, False, []); // useless for now
   //AddPlatform('PlatformSwitch', '--switch', False,  True, False, []);
